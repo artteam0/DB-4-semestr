@@ -1,0 +1,23 @@
+use master
+create database univer3 on primary
+(name='test_mdf', filename='D:\уник\4 сем\БД\lab03\test_mdf.mdf',
+size=10240KB, maxsize=1GB, filegrowth=25%),
+(name='test_ndf', filename='D:\уник\4 сем\БД\lab03\test_ndf.ndf',
+size=10240KB, maxsize=1GB, filegrowth=25%),
+filegroup FG1
+(name='test_fg1_1', filename='D:\уник\4 сем\БД\lab03\test_fg1_1', 
+size=10240Kb, maxsize=1Gb, filegrowth=25%),
+(name='test_fg1_2', filename='D:\уник\4 сем\БД\lab03\test_fg1_2', 
+size=10240Kb, maxsize=1Gb, filegrowth=25%)
+log on
+(name='test_log', filename='D:\уник\4 сем\БД\lab03\test_log',       
+ size=10240Kb, maxsize=2048Gb, filegrowth=10%)
+
+ use univer3
+create table test_table(
+audit_a nvarchar(50) primary key,
+audit_type nvarchar(50),
+audit_capacity int default 1,
+audit_name nvarchar(50),
+check (audit_capacity between 1 and 300),
+) on FG1;
